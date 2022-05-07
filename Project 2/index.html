@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>Jeopac Hostel | Homepage</title>
+        <style>
+
+            body{
+                padding-left: 100px;
+                padding-right: 100px;
+                font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                background-color: rgba(13, 97, 136, 0.568);
+            }
+
+            .top-nav-bar {
+                padding-top: 40px;
+                padding-bottom: 30px;
+                position: sticky;
+                top: 0;
+                background-color: rgb(17, 180, 126);
+            }
+
+            .bottom-nav-bar{
+                float: left;
+                background-color: rgb(17, 180, 126);
+                padding-top: 20px;
+                padding-bottom: 30px;
+                width: 1133px;
+            }
+
+            .bottom-nav-bar.logo{
+                padding-right: 300px;
+            }
+
+            #location{
+                float: center;
+                text-align: center;
+            }
+
+            .menus a {
+                color: #f8f5f5;
+                padding: 16px;
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: bold;
+
+            }
+
+            .menus a:hover {
+                color: rgb(1, 10, 7);
+            }
+
+            img{
+                width: 1133px;
+                height: 800px;
+            }
+
+            .slideshow{
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 1000px;
+                height: 800px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .slides{
+                display: flex;
+            }
+
+            .logo img{
+                width: 100px;
+                height: 100px;
+                float: left;
+                padding-left: 0;
+            }
+            h1{
+                color: white;
+                text-align: center;
+            }
+            h2{
+                text-align: center;
+            }
+        </style>
+        <script>
+            var i = 0;
+            var images = [];
+            var time = 2000;
+
+            images[0] = 'room1.jpg';
+            images[1] = 'room2.jpg';
+            images[2] = 'room3.jpg';
+            images[3] = 'hostell.jpg';
+
+            function slideimg() {
+                document.slide.src = images[i];
+
+                if(i < images.length - 1){
+                    i++;
+                }
+                else{
+                    i = 0;
+                }
+
+                setTimeout("slideimg()", time);
+            }
+
+            window.onload = slideimg;
+        </script>
+    </head>
+    <body>
+                        <!--Top Nav Bar Starts-->
+        <div class="top-nav-bar">
+            <div class="logo">
+                <img src="logo.png">
+            </div>
+            <h1>WELCOME TO JEOPAC HOSTEL</h1>
+            <div class="menus">
+                <a href="index.html">HOME</a>
+                <a href="#about">ABOUT</a>
+                <a href="#location">LOCATION</a>
+                <a href="#contact">CONTACT US</a>
+                <a href="form.html" target="_blank">REPORT A PROBLEM</a>
+            </div>
+        </div>
+                        <!--Top Nav Bar Ends-->
+
+                        <!--Slideshow Image-->
+       <img name="slide">
+                        <!--Slideshow Image Done-->
+
+        <h2 id="about">ABOUT JEOPAC HOSTEL</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id itaque hic eos sint ullam aperiam explicabo tempore similique delectus velit incidunt laboriosam dolorum vero, eveniet suscipit, nisi atque porro fugiat?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet non cupiditate itaque repellendus dicta, veritatis facilis provident debitis, modi, nam repellat placeat. Eligendi exercitationem nihil molestias consequatur suscipit at Lorem, ipsum dolor sit amet consectetur adipisicing elit. A provident eum vero itaque dolore accusantium saepe repellat non adipisci explicabo, porro deserunt ducimus officia, vel alias accusamus culpa quas? Iure?Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure debitis praesentium, delectus ea itaque explicabo inventore aliquam aspernatur magnam quia quo, et repellat, doloremque corrupti eaque suscipit excepturi ducimus. At!</p>
+
+                        <!--Bottom Nav Bar-->
+        <div class="bottom-nav-bar">
+            <div class="logo">
+                <img src="logo.png">
+            </div>
+            <div id="location">
+                Univerity of Ghana, Legon <br>
+                P. O. Box LG 295 <br>
+                info@jeopachostel.com <br>
+                Tel: +233 568 145 984 <br>
+                Email: jeopachostel2000@gmail.com
+            </div>
+        </div>
+    </body>
+</html>

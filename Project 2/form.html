@@ -1,0 +1,121 @@
+<!DOCTYPE html> 
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>Jeopac Hostel | Report A Problem</title>
+        <style>
+            body{
+                background-image: url(hostell.jpg);
+            }
+            .complaintform{
+                width: 800px;
+                margin: auto;
+                padding: 10px 0px 10px 0px;
+                text-align: center;
+                border-radius: 15px 15px 0px 0px;
+                background-color: rgba(0, 0, 0, 0.6);
+                font-weight: bold;
+                color: rgb(17, 180, 126);
+            }
+            button{
+                background-color: rgba(0, 0, 0, 0.6);
+                border-radius: 20%;
+                color: aqua;
+            }
+        </style>
+        <script>
+            var megaObject = {
+            "Mechanical Problems": {
+                "Electricals": ["Fan", "Sockets", "Light"],
+                "Plumbing": ["Water Closet", "Bathroom", "Sink"],
+                "Furniture and Fittings": ["Desks", "Wardrobes", "Shoe holder bench"]    
+            },
+            "Social Problem": {
+                "Noise-making": ["By roomates", "By neighbouring rooms"],
+                "Theft": ["REPORT"]
+            }
+            }
+            window.onload = function() {
+            var megaSel = document.getElementById("mega");
+            var macroSel = document.getElementById("macro");
+            var microSel = document.getElementById("micro");
+            for (var x in megaObject) {
+                megaSel.options[megaSel.options.length] = new Option(x, x);
+            }
+            megaSel.onchange = function() {
+                //empty Chapters- and Topics- dropdowns
+                microSel.length = 1;
+                macroSel.length = 1;
+                //display correct values
+                for (var y in megaObject[this.value]) {
+                macroSel.options[macroSel.options.length] = new Option(y, y);
+                }
+            }
+            macroSel.onchange = function() {
+                //empty Chapters dropdown
+                microSel.length = 1;
+                //display correct values
+                var z = megaObject[megaSel.value][this.value];
+                for (var i = 0; i < z.length; i++) {
+                microSel.options[microSel.options.length] = new Option(z[i], z[i]);
+                }
+            }
+            }
+        </script>
+    </head>
+    <body>
+        <form action="" method="post" class="complaintform">
+            <fieldset>
+                <legend>Personal Information</legend>
+                <label for="Stu-name">
+                    Student Name: <br>
+                    <input type="text" placeholder="Grant Gustin">
+                </label><br><br>
+                <label for="Stu-mail">
+                    Student E-mail: <br>
+                    <input type="email" placeholder="klegbi15@st.ug.edu.gh">
+                </label><br><br>
+                <label for="Stu-ID">
+                    Student ID: <br>
+                    <input type="number" maxlength="8" placeholder="10953175">
+                </label><br><br>
+                <label for="Stu-room-number">
+                    Student Room Number: <br>
+                    <input type="number" maxlength="4" placeholder="2963">
+                </label><br><br>
+                <label for="Stu-phone-number">
+                    Student Phone Number: <br>
+                    <input type="tel" maxlength="10" placeholder="0548638852">
+                </label>
+            </fieldset><br>
+            <fieldset>
+                <legend>Complaint</legend>
+                <label for="Gen-Problems">
+                    General Problem: <br>
+                    <select name="mega" id="mega">
+                        <option value="" selected>Select General Problem</option>
+                    </select>
+                </label><br><br>
+                <label for="Specific-Problem">
+                    Problem with: <br>
+                    <select name="macro" id="macro">
+                        <option value="" selected>Select Specific Problem</option>
+                    </select>
+                </label><br><br>
+                <label for="Spec-Problem">
+                    Specific problem is: <br>
+                    <select name="micro" id="micro">
+                        <option value="" selected>Select Specific Problem</option>
+                    </select>
+                </label><br><br>
+                <label for="Other">
+                    If none of this fields cover your problem, please type your problem description in the textbox below: <br>
+                    Type Here <br>
+                    <textarea name="Other" id="Other" cols="50" rows="20" placeholder="Type your problem here "></textarea>
+                </label>
+            </fieldset><br><br>
+            <button onclick="alert('Your complaint has been received')"><input type="submit" value="Submit Complaint"></button>
+            <button><input type="reset" value="Reset Form"></button>
+        </form>
+    </body>
+</html>
