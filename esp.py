@@ -1,0 +1,146 @@
+# import necessary libraries
+import re
+import pandas as pd
+from matplotlib import pyplot as plt
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+
+# read dataset
+data = pd.read_csv('data.csv')
+
+# combine features
+data['text_sub'] = data['text'] + ' ' + data['subreddit']
+
+# assign feature and target variable
+X = data['text_sub']
+y = data['label']
+
+lemmatizer = WordNetLemmatizer()
+
+# preprocess dataset
+def preprocess_dataset(dataset):
+    preprocessed_data = []
+    for sentence in dataset:
+        sentence = re.sub(r'#(\w+)', r'\1', sentence)
+        sentence = re.sub(r'@(\w+)', r'\1', sentence)
+        sentence = re.sub(r'[?!()]', '', sentence)
+        tokens = word_tokenize(sentence)
+        lemmatized_tokens = [lemmatizer.lemmatize(token) for token in tokens]
+        preprocessed_text = ' '.join(lemmatized_tokens)
+        preprocessed_data.append(preprocessed_text)
+    return preprocessed_data
+
+
+X = preprocess_dataset(X)
+
+# split dataset into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+# learn data conversion to binary
+vectorizer = TfidfVectorizer(binary=True)
+vectorizer.fit_transform(X_train)
+
+# convert features to binary
+X_train = vectorizer.transform(X_train)
+X_test = vectorizer.transform(X_test)
+
+# instance of logistic regression model
+log_reg = LogisticRegression()
+
+# train data
+model = log_reg.fit(X_train, y_train)
+
+# make predictions
+predictions = model.predict(X_test)
+
+# metrics
+accuracy = accuracy_score(y_test, predictions)
+precision = precision_score(y_test, predictions)
+recall = recall_score(y_test, predictions)
+
+print('Accuracy:', accuracy)
+print('Precision:', precision)
+print('Recall:', recall)
+
+plt.bar(['accuracy', 'precision', 'recall'], [accuracy, precision, recall])
+plt.xlabel('Metric')
+plt.ylabel('Score')
+plt.show()
+
+
+
+
+
+
+
+# import numpy as np
+
+# test = ["Hi. So, my husband is emotionally and mentally abusive", "i am calling you"]
+# test = vectorizer.transform(test)
+# # reshaped_data = np.array([test]).reshape(1, -1)
+# result = model.predict(test)
+# result_prob = model.predict_proba(test)
+# print(result)
+# print(result_prob)
+
+
+
+
+
+
+# from wordcloud import STOPWORDS, WordCloud
+
+# # Example text data
+# text = "This is an example sentence for creating a word cloud. Word clouds visualize word frequency."
+
+# text_data = " ".join(data['subreddit'])
+
+# # Create a WordCloud object
+# wordcloud = WordCloud(width=800, height=800, background_color='white', min_font_size=10, stopwords=STOPWORDS).generate(text_data)
+
+# # Display the word cloud using matplotlib
+# plt.figure(figsize=(8, 8), facecolor=None)
+# plt.imshow(wordcloud, interpolation="bilinear")
+# plt.axis("off")
+# plt.tight_layout(pad=0)
+
+# plt.show()
+
+
+# stress = 0
+# NoStress = 0
+
+# for data in data['label']:
+#     if data == 1:
+#         stress += 1
+#     else:
+#         NoStress += 1
+
+# print(f'Stress: {stress}')
+# print(f'Not Stressed: {NoStress}')
+
+
+
+
+# subreddit = data['subreddit'].unique()
+# count = 0
+# stress = 0
+# noStress = 0
+# for i in subreddit:
+#     for item, label in zip(data['subreddit'], data['label']):
+#         if i == item:
+#             count += 1
+#             if label == 1:
+#                 stress += 1
+#             else:
+#                 noStress += 1
+#     print(f"{i}: {count}")
+#     print(f"Stress: {stress}")
+#     print(f"Not Stressed: {noStress}\n\n")
+#     count = 0
+#     stress = 0
+#     noStress = 0
